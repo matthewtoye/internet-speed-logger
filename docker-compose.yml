@@ -10,7 +10,7 @@ services:
     volumes:
       - config:/data/config
   speedlogger-runner:
-    image: matthewtoye/internet-speed-logger
+    image: brennentsmith/internet-speed-logger
     depends_on:
       - speedlogger-web
     restart: always
