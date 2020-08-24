@@ -1,7 +1,9 @@
-version: "2"
+version: "2.4"
 services:
   speedlogger-web:
-    image: https://github.com/matthewtoye/internet-speed-logger
+    build:
+      context: https://github.com/matthewtoye/internet-speed-logger.git
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     depends_on:
@@ -10,7 +12,9 @@ services:
     volumes:
       - config:/data/config
   speedlogger-runner:
-    image: https://github.com/matthewtoye/internet-speed-logger
+    build:
+      context: https://github.com/matthewtoye/internet-speed-logger.git
+      dockerfile: Dockerfile
     depends_on:
       - speedlogger-web
     restart: always
