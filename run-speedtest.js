@@ -5,8 +5,8 @@ const dbInit = require('./db');
 
 // Get the command to execute
 const cmd = config.get('speedtest.commandString');
-console.log('Hello ' + process.env.WEB_PORT)
-console.log('Hello 2 ' + process.env.TESTING_VAL)
+console.log('Hello ' + process.env.WEB_PORT);
+console.log('Hello ' + process.argv[2] + " and: " + process.argv[1]);
 // Timing related constants
 const minimumIntervalS = 1800;
 const intervalS = Math.max(config.get('speedtest.intervalSec'), minimumIntervalS);
