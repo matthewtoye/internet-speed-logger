@@ -30,6 +30,6 @@ services:
       - MONGODB_DATABASE=speedtest
     volumes:
       - mongo:/bitnami
- volumes:
-   config:
-   mongo:
+volumes:
+    config:
+    mongo:
