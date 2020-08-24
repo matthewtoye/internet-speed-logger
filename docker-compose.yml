@@ -1,4 +1,4 @@
-version: "2.4"
+version: "2"
 services:
   speedlogger-web:
     image: matthewtoye/internet-speed-logger
@@ -29,7 +29,9 @@ services:
       - MONGODB_PASSWORD=speedtest
       - MONGODB_DATABASE=speedtest
     volumes:
-      - mongo:/bitnami
+      - mongoDB:/bitnami
 volumes:
-    config:
-    mongo:
+   mongoDB:
+      driver: local
+   config:
+      driver: local
