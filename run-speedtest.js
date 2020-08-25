@@ -25,6 +25,7 @@ function insertData(result) {
     const { jitter } = result.ping;
     const download = result.download.bandwidth * byteToMbit;
     const upload = result.upload.bandwidth * byteToMbit;
+    console.log("Server used: " + result.server.name + " id: " + result.server.id);
     const speedtestResult = {
       date: new Date(timestamp), ping, download, upload, jitter,
     };
