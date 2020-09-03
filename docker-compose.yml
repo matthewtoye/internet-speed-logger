@@ -20,6 +20,9 @@ services:
       - daemon
       - ${TIME_BETWEEN_TESTS}
       - ${SPEEDTEST_OR_PINGTEST}
+      - ${NUMBER_OF_PINGS}
+      - ${PING_TIMOUT}
+      - ${TEST_SERVER}
     volumes:
       - config:/data/config
   mongo:
