@@ -11,6 +11,14 @@ const minimumIntervalS = 60;
 const intervalS = Math.max(process.argv[3], minimumIntervalS);
 const intervalMS = intervalS * 1000;
 
+const PingTest = false;
+const SpeedTest = true;
+
+if (process.argv[4] >= 0) {
+	PingTest = true;
+	SpeedTest = false;
+}
+
 const isDaemon = process.argv[2] === 'daemon';
 
 function getDelay(interval) {
@@ -46,15 +54,22 @@ function insertData(result) {
 
 function processOutput(error, stdout, stderr) {
   if (error) {
-    console.error('Error executing Speedtest');
+    console.error('Error executing test');
     console.error(error);
   }
   if (stderr) {
     console.error(stderr);
   }
   try {
-    const data = JSON.parse(stdout);
-    insertData(data);
+	if (PingTest) {
+		averagePing = stdout.split("=");
+		averagePing = averagePing[averagePing.length-1].split("/")[1];
+		thistime = `date +%Y-%m-%dT%H:%M:%SZ`;
+		console.log("date is: " + thistime + " ping: " + averagePing);
+	} else {
+		const data = JSON.parse(stdout);
+		insertData(data);
+	}
   } catch (err) {
     console.error('Failed to connect to parse output');
     console.error(err);
@@ -65,13 +80,17 @@ function processOutput(error, stdout, stderr) {
       const delay = getDelay(intervalMS);
       console.log(`Sleeping for ${Math.floor(delay / 1000)} seconds before next run...`);
       // eslint-disable-next-line no-use-before-define
-      setTimeout(executeSpeedtest, delay);
+      setTimeout(executeTest, delay);
     }
   }
 }
 
-function executeSpeedtest() {
-  exec(cmd, processOutput);
+function executeTest() {
+	if (PingTest) {
+		exec("ping -c 5 speedtest.net", processOutput);
+	} else {
+		exec(cmd, processOutput);
+	}
 }
 
-executeSpeedtest();
+executeTest();

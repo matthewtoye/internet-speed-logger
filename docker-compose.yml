@@ -19,6 +19,7 @@ services:
       - run-speedtest.js
       - daemon
       - ${TIME_BETWEEN_TESTS}
+      - ${SPEEDTEST_OR_PINGTEST}
     volumes:
       - config:/data/config
   mongo:

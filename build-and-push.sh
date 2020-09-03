@@ -3,7 +3,7 @@
 set -ex
 
 PARENT_DIR=$(basename "${PWD%/*}")
-IMAGE_NAME="brennentsmith/internet-speed-logger"
+IMAGE_NAME="matthewtoye/internet-speed-logger"
 TAG=$(git rev-parse --short HEAD)
 
 docker build -t ${IMAGE_NAME}:${TAG} .
